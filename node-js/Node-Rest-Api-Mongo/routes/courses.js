@@ -16,7 +16,8 @@ router.get("/allcourses", async (req, res) => {
 
  router.post("/",async(req,res) => {
     try{
-        Course.create(req.body);
+      const course= await Course.create(req.body);
+      res.json(course);
     } catch (err) {
         res.json(err)
     }
