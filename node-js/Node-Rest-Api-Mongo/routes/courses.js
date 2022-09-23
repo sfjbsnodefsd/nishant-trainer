@@ -14,7 +14,7 @@ router.get("/allcourses", async (req, res) => {
 
 // add a course
 
- router.post("/",async(req,res) => {
+ router.post("/addcourse",async(req,res) => {
     try{
       const course= await Course.create(req.body);
       res.json(course);
