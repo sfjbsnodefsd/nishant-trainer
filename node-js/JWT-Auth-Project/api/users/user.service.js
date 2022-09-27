@@ -23,4 +23,29 @@ module.exports = {
       }
     );
   },
+
+  getUsers: (callBack) => {
+    pool.query(
+      `select id,firstname,lastname,gender,email,number from resgistartion`,
+      [],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        }
+        return callBack(null, results);
+      }
+    );
+  },
+  getUserById: (id,callBack) => {
+    pool.query(
+      `select id,firstname,lastname,gender,email,number from resgistartion where id = ?`,
+      [id],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        }
+        return callBack(null, results);
+      }
+    );
+  },
 };
