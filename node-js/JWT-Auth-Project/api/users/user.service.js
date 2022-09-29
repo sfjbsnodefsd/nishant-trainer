@@ -48,7 +48,6 @@ module.exports = {
       }
     );
   },
-
   updateUser: (data, callBack) => {
     pool.query(
       `update registration set firstName=?,lastName=?,gender=?,email=?,password=?,number=? where id = ?`,
@@ -81,7 +80,6 @@ module.exports = {
       }
     );
   },
-
   getUserByUserEmail: (email, callBack) => {
     pool.query(
       `select * from registration where email = ?`,
@@ -94,6 +92,4 @@ module.exports = {
       }
     )
   }
-
-
 };
