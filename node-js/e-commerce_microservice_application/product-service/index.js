@@ -46,7 +46,7 @@ app.post("/product/create", isAuthenticated, async (req, res) => {
 // the order will be created of those products and the sum of the products prices will be the total billing amount
 
 app.post("/product/buy", isAuthenticated, async (req, res) => {
-  const [ids] = req.body;
+  const { ids } = req.body;
   const products = await Product.find(_id, { $in: ids });
 
   channel.sendToQueue(

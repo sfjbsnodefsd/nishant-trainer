@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const amqp = require("amqplib");
-const Product = require("./Product");
-const isAuthenticated = require("../isAuthenticated");
+
+
 app.use(express.json());
 
 mongoose.connect(
@@ -24,8 +24,14 @@ async function connect() {
   await channel.assertQueue("ORDER");
 }
 
-connect();
+connect().then(() => {
+    channel.consume("ORDER", data => {
+        const {products , userEmail} = JSON.parse(data.content);
+        console.log("consuming order queue")
+        console.log(products);;
+    })
+});
 
 app.listen(5002, () => {
-  console.log(`product service is working at port 5002`);
+  console.log(`order service is working at port 5002`);
 });
