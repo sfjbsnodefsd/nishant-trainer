@@ -41,6 +41,19 @@ app.post("/product/create", isAuthenticated, async (req, res) => {
   return res.json(newProduct);
 
 })
+
+// user will send a lift of the products that the user wants to buy , they will be identified by the product id 
+// the order will be created of those products and the sum of the products prices will be the total billing amount 
+
+app.post("/product/buy", isAuthenticated, async (req, res) => {
+  const [ids] = req.body;
+  const products = await Product.find(_id,{ $in: ids});
+})
+
+
+
+
+
 app.listen(5001, () => {
   console.log(`product service is working at port 5001`);
 });
