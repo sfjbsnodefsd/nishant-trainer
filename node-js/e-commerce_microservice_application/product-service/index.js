@@ -39,6 +39,7 @@ app.post("/product/create", isAuthenticated, async (req, res) => {
     description,
     price,
   });
+  newProduct.save();
   return res.json(newProduct);
 });
 
@@ -47,7 +48,7 @@ app.post("/product/create", isAuthenticated, async (req, res) => {
 
 app.post("/product/buy", isAuthenticated, async (req, res) => {
   const { ids } = req.body;
-  const products = await Product.find(_id, { $in: ids });
+  const products = await Product.find({_id: { $in: ids }});
 
   channel.sendToQueue(
     "ORDER",
