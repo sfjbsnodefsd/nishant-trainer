@@ -8,7 +8,7 @@ const Product = require("./Product");
 const isAuthenticated = require("../isAuthenticated");
 app.use(express.json());
 var channel, connection;
-
+var order;
 mongoose.connect(
   "mongodb://localhost:27017/product-service",
   {
@@ -59,6 +59,11 @@ app.post("/product/buy", isAuthenticated, async (req, res) => {
       })
     )
   );
+  channel.consume("PRODUCT", data => {
+    console.log("consuming product queue");
+     order = JSON.parse(data.content);
+  })
+  return res.json(order)
 });
 
 app.listen(5001, () => {
