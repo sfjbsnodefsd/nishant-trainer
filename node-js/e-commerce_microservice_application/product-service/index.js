@@ -62,6 +62,7 @@ app.post("/product/buy", isAuthenticated, async (req, res) => {
   channel.consume("PRODUCT", data => {
     console.log("consuming product queue");
      order = JSON.parse(data.content);
+     channel.ack(data);
   })
   return res.json(order)
 });

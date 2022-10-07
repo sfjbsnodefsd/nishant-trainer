@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const amqp = require("amqplib");
-var channel, connection;
+let channel, connection;
+  const Order = require("./Order")
 
 app.use(express.json());
 
