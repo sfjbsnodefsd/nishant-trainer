@@ -10,5 +10,9 @@ app.get("/test/subjects", (req, res) => {
     res.send(['maths',"science", "IT"]);
 })
 
+const add = (a,b) => {
+    return a + b;
+}
 
-module.exports = app;
+module.exports = add
+app.listen(8080, () => console.log("listening to port 8080"));
