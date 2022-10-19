@@ -1,6 +1,5 @@
 console.log("producer");
 import Kafka from "node-rdkafka";
-
 const stream = Kafka.createWriteStream(
   {
     "metadata.broker.list": "localhost:9092",
@@ -8,12 +7,14 @@ const stream = Kafka.createWriteStream(
   {},
   { topic: "test" }
 );
-
-
 function queueMessage() {
-    const result = stream.write(Buffer.from("Hey my name is nishant"))
-    console.log(result);
+  const sucess = stream.write(Buffer.from("Hey my name is nishant"));
+  if (sucess) {
+    console.log("message published sucessfully to stream");
+  } else {
+    console.log("something went wrong");
+  }
 }
-setInterval(()=>{
-    queueMessage();
-}, 3000)
+setInterval(() => {
+  queueMessage();
+}, 3000);
