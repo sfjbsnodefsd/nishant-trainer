@@ -8,6 +8,10 @@ async function connect() {
     connection = await amqp.connect(amqpServer);
     channel = await connection.createChannel();
     await channel.assertQueue("Rabbit");
+    channel.consume("Rabbit", data => {
+        console.log(`recived the data from the producer : ${Buffer.from(data.content)}`);
+        //channel.ack(data)
+    })
   } catch (err) {
     console.log(err);
   }
