@@ -10,6 +10,16 @@ import { UserService } from 'src/app/Services/user.service';
 export class RegisteredUsersComponent implements OnInit {
   users : User[] = [];
 
+  deleteRow(user,index){
+    const observables = this.userService.deleteUser(user);
+    observables.subscribe((response:any) => {
+      console.log(response);
+      this.users.splice(index,1)
+      
+    })
+    
+  }
+
   constructor( public userService: UserService) { }
 
   ngOnInit(): void {
